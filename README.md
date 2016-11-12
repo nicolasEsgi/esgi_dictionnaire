@@ -11,5 +11,7 @@
 	<li>Parser les fichier à ajouter : <code>git commit -m <i>message</i></code></li>
 	<li>Mettre en ligne sur sa branche de taravil : <code>git push origin <i>nomBranche</i></code></li>
 	<li>Récupérer le contenu d'une branche : <code>git pull origin <i>nomBranche</i></code></li>
+
+	<p>Modification du readme</p>
 	
 </ul>
