@@ -1,8 +1,6 @@
 <h1>Commande Github</h1>
 Salut tous le monde c'est ahmed :p
-
 lol
-
 <ul>
 	<li>Récupérer le projet à partir de GitHub : <code>git clone <i>lienRepository</i></code></li>
 	<li>Créer une banchgit e : <code>git branch <i>nomBranche</i></code></li>
