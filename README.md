@@ -1,8 +1,8 @@
-<h1>Commande Fithub</h1>
+<h1>Commande Github</h1>
 
 <ul>
 	<li>Récupérer le projet à partir de GitHub : <code>git clone <i>lienRepository</i></code></li>
-	<li>Créer une banche : <code>git branch <i>nomBranche</i></code></li>
+	<li>Créer une banchgit e : <code>git branch <i>nomBranche</i></code></li>
 	<li>Changer de branche : <code>git checkout <i>laBranche</i></code></li>
 	<li>Regarder les fichiers modifiés : <code>git status</code>. En rouge les fichiers modifié, en vert les fichiers add</li>
 	<li>Ajouter un ou plusiers fichiers : <code>git add <i>nameFichier</i> ou "." pour tout</code></li>
