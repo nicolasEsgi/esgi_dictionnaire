@@ -11,8 +11,6 @@
 	<li>Récupérer le contenu d'une branche : <code>git pull origin <i>nomBranche</i></code></li>
 </ul>
 
-<h2>J'ai modifié !!</h2>
-
 <ul>
 	<li><code>git add <i>README.md</i></code></li>
 	<li><code>git commit -m "<i>message</i>"</code></li>
