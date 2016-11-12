@@ -1,4 +1,4 @@
-<h1>Commande Kithub</h1>
+<h1>Commande Lithub</h1>
 
 <ul>
 	<li>Récupérer le projet à partir de GitHub : <code>git clone <i>lienRepository</i></code></li>
