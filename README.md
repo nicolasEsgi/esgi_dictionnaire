@@ -1,4 +1,4 @@
-<h1>Commande Mithub</h1>
+<h1>Commande Github</h1>
 
 <ul>
 	<li>Récupérer le projet à partir de GitHub : <code>git clone <i>lienRepository</i></code></li>
