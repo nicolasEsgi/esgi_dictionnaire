@@ -1,0 +1,57 @@
+# depslib dependency file v1.0
+1478011430 source:c:\users\nico\documents\projet_dictionnaire\partie_1\dictionnaire\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<dirent.h>
+	"gesbib.h"
+	<sys/types.h>
+
+1478010234 c:\users\nico\documents\projet_dictionnaire\partie_1\dictionnaire\gesbib.h
+
+1478189494 source:c:\users\nico\documents\projet_dictionnaire\partie_1\dictionnaire\gesbib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<dirent.h>
+	"gesbib.h"
+	<sys/types.h>
+
+1478780544 source:c:\users\nico\documents\esgi\projets\projet_dictionnaire\partie_1\dictionnaire\gesbib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<dirent.h>
+	"gesbib.h"
+	<sys/types.h>
+
+1478629451 c:\users\nico\documents\esgi\projets\projet_dictionnaire\partie_1\dictionnaire\gesbib.h
+
+1479551961 source:c:\users\nico\documents\esgi\projets\projet_dictionnaire\partie_1\dictionnaire\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<dirent.h>
+	"gestbib.h"
+	<sys/types.h>
+
+1479550858 c:\users\nico\documents\esgi\projets\projet_dictionnaire\partie_1\dictionnaire\gestbib.h
+
+1479552099 source:c:\users\nico\documents\esgi\projets\projet_dictionnaire\partie_1\dictionnaire\gestbib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<dirent.h>
+	"gestbib.h"
+	<sys/types.h>
+

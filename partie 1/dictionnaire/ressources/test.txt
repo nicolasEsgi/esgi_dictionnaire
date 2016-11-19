@@ -1,0 +1,5 @@
+chargeur
+maison
+ordinateur
+porte
+vitre
