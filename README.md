@@ -19,6 +19,6 @@
 	<li><code>git push origin <i>branche1</i></code></li>
 	<li><code>git checkout master</code></li>
 	<li><code>git pull origin <i>branche1</i></code></li>
-	<li><strong>Résoudre tous les problèmes obligatoirement !!</strong></li>
+	<li><strong>Résoudre tous les  obligatoirement !!</strong></li>
 	<li><code>git push origin master</code></li>
 </ul>
