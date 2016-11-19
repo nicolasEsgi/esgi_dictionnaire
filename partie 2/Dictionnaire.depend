@@ -1,0 +1,72 @@
+# depslib dependency file v1.0
+1477509274 source:e:\projects\dictionnaire\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	<sys/types.h>
+
+1477745863 source:c:\users\rjeya\documents\projects\c\dictionnaire\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	"gestbib.h"
+	<sys/types.h>
+
+1477745644 c:\users\rjeya\documents\projects\c\dictionnaire\gestbib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	"gestbib.h"
+
+1477745255 c:\users\rjeya\documents\projects\c\dictionnaire\gestbib.h
+
+1477749684 source:c:\users\rjeya\documents\projects\c\dictionnaire\gestbib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	"gestbib.h"
+
+1478347149 source:c:\users\rjeya\documents\esgi\c\dictionnaire\gestbib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	"gestbib.h"
+
+1478981962 c:\users\rjeya\documents\esgi\c\dictionnaire\gestbib.h
+	"gestbib.h"
+
+1479549996 source:c:\users\rjeya\documents\esgi\c\dictionnaire\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	"gestbib.h"
+	"gestrech.h"
+	<sys/types.h>
+	<stdio.h>
+
+1477930424 c:\users\rjeya\documents\esgi\c\dictionnaire\gestbib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	"gestbib.h"
+
+1479549988 c:\users\rjeya\documents\esgi\c\dictionnaire\gestrech.h
+
+1479333023 c:\users\rjeya\documents\esgi\c\dictionnaire\gestrech.c
+	"gestrech.h"
+
+1479552699 source:c:\users\rjeya\documents\esgi\c\dictionnaire\gestrech.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	"gestrech.h"
+	<sys/types.h>
+
