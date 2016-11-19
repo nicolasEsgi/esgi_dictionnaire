@@ -69,7 +69,7 @@ char* fNameDecoupage(char* str);
  *      Ne prends rien en parametre
  *      Ne renvoi rien
  */
-void fInsert();
+unsigned int wordInsert();
 
 void wordSuppr();
 

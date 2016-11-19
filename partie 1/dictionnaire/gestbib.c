@@ -21,7 +21,7 @@ unsigned int f_create(){
 
     char fileName[50];
     printf("Saisissez le nom du fichier sans espace :\n ");
-    scanf("\n%s[^\n]", &fileName);
+    scanf("\n%s[^\n]", fileName);
 
     int pathLenght = strlen(fileName) + strlen(dirStr) + strlen(extension); // Longueur du path en int pour faire un malloc
 
@@ -41,7 +41,7 @@ unsigned int f_create(){
                || choice == 'o' || 'n' == choice));
         if(choice == 'O' || choice == 'o'){
             printf("Saisissez un nouveau nom sans espace :\n ");
-            scanf("\n%s[^\n]", &fileName);
+            scanf("\n%s[^\n]", fileName);
 
             strcpy(path,dirStr);
             strcat(path,strcat(fileName, extension));
@@ -49,7 +49,7 @@ unsigned int f_create(){
             break;
         }
 
-    }while(fExiste(f) != 1 && choice != 'n' || choice != 'N');
+    }while((fExiste(f) != 1) && ((choice != 'n') || (choice != 'N')));
 
     f = fopen(path, "w+");
     if(f != NULL){
@@ -75,7 +75,7 @@ unsigned int f_create(){
 unsigned int f_destroyer(){
     char fileName[50];
     printf("Saisissez le nom du fichier sans espace :\n ");
-    scanf("\n%s[^\n]", &fileName);
+    scanf("\n%s[^\n]", fileName);
     const char dirStr[17] = ".\\ressources\\";
     const char extension[6] = ".txt";
     int pathLenght = strlen(fileName) + strlen(dirStr) + strlen(extension); // Longueur du path en int pour faire un malloc
@@ -164,7 +164,7 @@ void startMenu(){
          scanf("\n%[^\n]", &answer);
     }while(answer<49 || answer>55);
 
-    unsigned int a;
+    unsigned int result;
     DIR* repertory = opendir(folder);
     switch(answer){
         case creer:
@@ -174,16 +174,20 @@ void startMenu(){
         case recherche:
             break;
         case parcourir:
-            a = dListe(repertory);
+            result = dListe(repertory);
 
+            if(result == 0){
+                printf("Probleme d'ouverture du dossier");
+            }else{
 
-            printf("Que voulez-vous faire ?\n");
-            printf("1 - Utiliser un dictionnaire\n");
-            printf("2 - Retour au menu principal\n");
-            printf("\nVotre choix -> ");
-            scanf("\n%[^\n]", &answer);
-            if(answer == 49){ // == 1
-                fUse();
+                printf("Que voulez-vous faire ?\n");
+                printf("1 - Utiliser un dictionnaire\n");
+                printf("2 - Retour au menu principal\n");
+                printf("\nVotre choix -> ");
+                scanf("\n%[^\n]", &answer);
+                if(answer == 49){ // == 1
+                    fUse();
+                }
             }
             break;
         case supprimer:
@@ -262,7 +266,7 @@ unsigned int dListe(DIR* rep){
 
 unsigned int fUse(){
     char fName[10];
-    const char folder[250] = ".\\ressources\\";
+    char folder[250] = ".\\ressources\\";
     unsigned int resultfExiste;
     printf("Choisir un nom de dictionnaire\n");
     scanf("%s", fName);
@@ -304,26 +308,28 @@ char* fNameDecoupage(char* str){
  *      Ne renvoi rien
  */
 
-void wordInsert(){
-    const char folder[250] = ".\\ressources\\";
+unsigned int wordInsert(){
+    char folder[250] = ".\\ressources\\";
     const char fName[100] = "test";
     const char fextension[5] = ".txt";
     strcat (folder, fName);
     strcat (folder, fextension);
     printf("%s\n", folder); // DEBUGGAGE
     FILE* fSource = fopen(folder, "r"); // ecriture lecture
-    int a = fExiste(fSource);
-    printf("%d\n", a); // a = 1
+    int result = fExiste(fSource);
+    if(result == 0){
+        printf("Le fichier n'exite pas");
+        return 0;
+    }
     FILE* fSortie = fopen(".\\ressources\\temp.txt", "w");
-    a = fExiste(fSortie);
-    printf("%d\n", a); // a = 0 ??
+    result = fExiste(fSortie);
 
     char line[1024];
     char words [50]; // mot à chercher
     char ch = ' ';
-    printf("MOT A AJOUTER -> ");
-    scanf("\n%[^\n]", &words);
-    int x = 0;
+    printf("Saisir le mot a ajouter -> ");
+    scanf("\n%s[^\n]", words);
+    int resSearch = 0;
     int index = 0;
     while ((ch = getc ( fSource )) != EOF ) { // parcours tant que pas fin de fichier
         if ( ch != '\n'){
@@ -331,25 +337,25 @@ void wordInsert(){
         }else {
             line[index] = '\0'; // remplace \n par un \0 fin de chaine
             index=0;
-           if (x != 0){
+           if (resSearch != 0){
                fprintf(fSortie, "%s\n", line);
            }else{
                if(strcmp(words,line) < 0) {
                     fprintf(fSortie, "%s\n", words);
                     fprintf(fSortie, "%s\n", line);
                     printf("Insertion effectuer\n");
-                    x = 1;
+                    resSearch = 1;
                 }else if (strcmp(line,words) == 0) {
                     printf("Le mot existe deja\n");
                     fprintf(fSortie, "%s\n", line);
-                    x = 1;
+                    resSearch = 1;
                 }else{
                     fprintf(fSortie, "%s\n", line);
                 }
             }
         }
     }
-    if (1 != x) {
+    if (1 != resSearch) {
         fprintf(fSortie, "%s\n", words);
         printf("Insertion effectuer\n");
     }
@@ -358,10 +364,11 @@ void wordInsert(){
     remove(folder);
     rename(".\\ressources\\temp.txt", folder);
     remove(".\\ressources\\temp.txt");
+    return 1;
 }
 
 void wordSuppr(){
-    const char folder[250] = ".\\ressources\\";
+    char folder[250] = ".\\ressources\\";
     const char fName[100] = "test";
     const char fextension[5] = ".txt";
     strcat (folder, fName);
@@ -374,7 +381,7 @@ void wordSuppr(){
     char words [50]; // mot à chercher
     char ch = ' ';
     printf("MOT A SUPPRIMER -> ");
-    scanf("\n%[^\n]", &words);
+    scanf("\n%s[^\n]", words);
     int index = 0;
     while ((ch = getc ( fSource )) != EOF ) { // parcours tant que pas fin de fichier
         if ( ch != '\n'){
@@ -419,7 +426,7 @@ void fsearch (char * words) {
     char ch = getc ( fp );
     int x = 0;
     int index = 0;
-    while ( ch = getc ( fp ) != EOF ) { // parcours tant que pas fin de fichier
+    while ((ch = getc (fp)) != EOF ) { // parcours tant que pas fin de fichier
         if ( ch != '\n'){
             line[index++] = ch; // insére à la suite tant que pas \n
         }else {
