@@ -67,11 +67,17 @@ char* fNameDecoupage(char* str);
 /*
  *      Fonction qui permet l'insertion d'un mot dans le dictionnaire
  *      Ne prends rien en parametre
- *      Ne renvoi rien
+ *      Retourne 0 en cas d'erreur sinon 1
  */
 unsigned int wordInsert();
 
-void wordSuppr();
+
+/*
+ *      Fonction qui permet la suppression d'un mot dans le dictionnaire
+ *      Ne prends rien en parametre
+ *      Retourne 0 en cas d'erreur sinon 1
+ */
+unsigned int wordSuppr();
 
 // -------------------------------------------------------------------------------
 
