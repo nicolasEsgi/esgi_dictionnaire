@@ -367,7 +367,7 @@ unsigned int wordInsert(){
     return 1;
 }
 
-void wordSuppr(){
+unsigned int wordSuppr(){
     char folder[250] = ".\\ressources\\";
     const char fName[100] = "test";
     const char fextension[5] = ".txt";
@@ -375,12 +375,18 @@ void wordSuppr(){
     strcat (folder, fextension);
     printf("%s\n", folder); // DEBUGGAGE
     FILE* fSource = fopen(folder, "r"); // ecriture lecture
+    int result = fExiste(fSource);
+    if(result == 0){
+        printf("Le fichier n'exite pas");
+        return 0;
+    }
     FILE* fSortie = fopen(".\\ressources\\temp.txt", "w");
+    int resSearch = 0;
 
     char line[1024];
     char words [50]; // mot à chercher
     char ch = ' ';
-    printf("MOT A SUPPRIMER -> ");
+    printf("Saisir un mot a supprimer -> ");
     scanf("\n%s[^\n]", words);
     int index = 0;
     while ((ch = getc ( fSource )) != EOF ) { // parcours tant que pas fin de fichier
@@ -392,15 +398,21 @@ void wordSuppr(){
                if(strcmp(words,line) != 0) {
                     fprintf(fSortie, "%s\n", line);
                 }else{
+                    resSearch = 1;
                     printf("Suppression effectuer\n");
                 }
             }
         }
+    if(resSearch == 0){
+        printf("Le mot n'est pas present dans le dictionnaire\n");
+        return 0;
+    }
     fclose(fSource);
     fclose(fSortie);
     remove(folder);
     rename(".\\ressources\\temp.txt", folder);
     remove(".\\ressources\\temp.txt");
+    return 1;   // OK
 }
 
 // --------------------------------------------------------------------
