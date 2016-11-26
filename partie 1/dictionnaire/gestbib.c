@@ -428,9 +428,8 @@ char * remove_spaces(const char *input, char *result)
   return result;
 }
 
-void fsearch (char * words) {
+int fsearch (char * words,FILE* fp ) {
 
-    FILE *fp = fopen ( "test.txt", "r");
     char line[1024];
     char ch = getc ( fp );
     int x = 0;
@@ -449,9 +448,12 @@ void fsearch (char * words) {
             }
         }
     }
-    if (1 != x) {
-        printf("mot introuvable");
-    }
 
     fclose ( fp );
+
+    if (1 != x) {
+        printf("mot introuvable");
+        return 0;
+    }
+    return 1;
 }

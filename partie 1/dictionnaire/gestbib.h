@@ -85,6 +85,6 @@ unsigned int wordSuppr();
 char * remove_spaces(const char *input, char *result);
 
 // cherche un mot et printf si oui ou non le mot est dans le fichier
-void fsearch (char * words);
+void fsearch (char * words,FILE *fp);
 
 #endif // GESTBIB_H_INCLUDED
