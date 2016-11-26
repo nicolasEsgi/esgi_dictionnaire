@@ -261,14 +261,16 @@ unsigned int dListe(DIR* rep){
 /*
  *      Permet d'utiliser un dico choisi a la main
  *      Prend aucun paramètre
- *      Retourne 0 en cas d'erreur sinon 1
+ *      Retourne un STRING /!\ MALLOC
  */
 
-FILE* fUse(){
+char* fUse(){
     char fName[50];
     const char folder[250] = ".\\ressources\\";
     const char fextension[5] = ".txt";
-    char path[300];
+    int pathLenght = strlen(fName) + strlen(folder) + strlen(fextension); // Longueur du path en int pour faire un malloc;
+    char* path = malloc(sizeof(char) * pathLenght + 1);
+
     printf("Choisir un nom de dictionnaire\n");
     scanf("%s", fName);
 
@@ -277,8 +279,7 @@ FILE* fUse(){
     strcat (path, fextension);
     printf("%s\n", path); // DEBUGGAGE
 
-    FILE* f = fopen(path, "r");
-    return f;
+    return path;
 }
 
 
@@ -305,14 +306,8 @@ char* fNameDecoupage(char* str){
  *      Ne renvoi rien
  */
 
-unsigned int wordInsert(){
-    char folder[250] = ".\\ressources\\";
-    const char fName[100] = "test";
-    const char fextension[5] = ".txt";
-    strcat (folder, fName);
-    strcat (folder, fextension);
-    printf("%s\n", folder); // DEBUGGAGE
-    FILE* fSource = fopen(folder, "r"); // ecriture lecture
+unsigned int wordInsert(char* path){
+    FILE* fSource = fopen(path, "r"); // ecriture lecture
     int result = fExiste(fSource);
     if(result == 0){
         printf("Le fichier n'exite pas");
@@ -358,8 +353,8 @@ unsigned int wordInsert(){
     }
     fclose(fSource);
     fclose(fSortie);
-    remove(folder);
-    rename(".\\ressources\\temp.txt", folder);
+    remove(path);
+    rename(".\\ressources\\temp.txt", path);
     remove(".\\ressources\\temp.txt");
     return 1;
 }
@@ -428,7 +423,7 @@ char * remove_spaces(const char *input, char *result)
   return result;
 }
 
-int fsearch (char * words,FILE* fp ) {
+unsigned int fsearch (char * words,FILE* fp ) {
 
     char line[1024];
     char ch = getc ( fp );
