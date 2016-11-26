@@ -264,24 +264,21 @@ unsigned int dListe(DIR* rep){
  *      Retourne 0 en cas d'erreur sinon 1
  */
 
-unsigned int fUse(){
-    char fName[10];
-    char folder[250] = ".\\ressources\\";
-    unsigned int resultfExiste;
+FILE* fUse(){
+    char fName[50];
+    const char folder[250] = ".\\ressources\\";
+    const char fextension[5] = ".txt";
+    char path[300];
     printf("Choisir un nom de dictionnaire\n");
     scanf("%s", fName);
 
-    strcat (folder, fName);
-    printf("%s\n", folder);
+    strcpy(path, folder);
+    strcat (path, fName);
+    strcat (path, fextension);
+    printf("%s\n", path); // DEBUGGAGE
 
-    FILE* ficfic = fopen(folder, "r");
-    resultfExiste =  fExiste(ficfic);
-    if(resultfExiste == 1){
-        printf("Votre dictionnaire est pret a l'emploi.\n");
-        return 1;
-    }else{
-        return 0;
-    }
+    FILE* f = fopen(path, "r");
+    return f;
 }
 
 

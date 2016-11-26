@@ -16,6 +16,7 @@ int main(int argc, char** argv)
 {
     //startMenu();
     //fInsert();
-    wordSuppr();
+    //wordSuppr();
+    fUse();
     return 0;
 }
