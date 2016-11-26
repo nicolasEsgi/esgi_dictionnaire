@@ -50,7 +50,7 @@ unsigned int dListe(DIR* rep);
  *      Retourne 0 en cas d'erreur sinon 1
  */
 
-unsigned int fUse();
+FILE* fUse();
 
 
 
