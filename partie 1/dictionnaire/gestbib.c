@@ -14,28 +14,24 @@
 /// unsigned int i = f_create();
 /// Retourne 1 si le fichier a été créé
 /// En cas d'erreur, il retourn 0
-unsigned int f_create(char * path){
+unsigned int f_create(){
     unsigned int valReturn = 0;
     const char dirStr[17] = ".\\ressources\\";
     const char extension[6] = ".txt";
 
     char fileName[50];
-/*    printf("Saisissez le nom du fichier sans espace :\n ");
+    printf("Saisissez le nom du fichier sans espace :\n ");
     scanf("\n%s[^\n]", fileName);
-*/
-//    int pathLenght = strlen(fileName) + strlen(dirStr) + strlen(extension); // Longueur du path en int pour faire un malloc
 
-//    char* path = malloc(sizeof(char) * pathLenght + 1);
-/*
+    int pathLenght = strlen(fileName) + strlen(dirStr) + strlen(extension); // Longueur du path en int pour faire un malloc
+
+    char* path = malloc(sizeof(char) * pathLenght + 1);
+
     strcpy(path,dirStr);
     strcat(path,strcat(fileName, extension));
-*/
+
     char choice;
-
     FILE *f = fopen(path, "r");
-
-    free(path);
-
     do{
         fclose(f);
         do{
@@ -64,9 +60,10 @@ unsigned int f_create(char * path){
     printf("Le fichier a ete cree avec succes !");
 
 
+    free(path);
+
     return valReturn;
-}
-//strcat(dirStr,strcat(fileName, extension))
+}//strcat(dirStr,strcat(fileName, extension))
 
 /// Supprime un fichier en prenant en paramètre le
 /// le chemin du fichier

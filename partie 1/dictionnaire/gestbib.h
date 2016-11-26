@@ -8,7 +8,7 @@
 /// unsigned int i = f_create();
 /// Retourne 1 si le fichier a été créé
 /// En cas d'erreur, il retourn 0
-unsigned int f_create(char * path);
+unsigned int f_create();
 
 
 /// Supprime un fichier en prenant en paramètre le
