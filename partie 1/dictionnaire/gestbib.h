@@ -50,7 +50,7 @@ unsigned int dListe(DIR* rep);
  *      Retourne 0 en cas d'erreur sinon 1
  */
 
-FILE* fUse();
+char* fUse();
 
 
 
@@ -69,7 +69,7 @@ char* fNameDecoupage(char* str);
  *      Ne prends rien en parametre
  *      Retourne 0 en cas d'erreur sinon 1
  */
-unsigned int wordInsert();
+unsigned int wordInsert(char* fSource);
 
 
 /*
@@ -85,6 +85,6 @@ unsigned int wordSuppr();
 char * remove_spaces(const char *input, char *result);
 
 // cherche un mot et printf si oui ou non le mot est dans le fichier
-void fsearch (char * words,FILE *fp);
+unsigned int fsearch (char * words,FILE *fp);
 
 #endif // GESTBIB_H_INCLUDED
