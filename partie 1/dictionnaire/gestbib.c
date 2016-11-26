@@ -14,24 +14,28 @@
 /// unsigned int i = f_create();
 /// Retourne 1 si le fichier a été créé
 /// En cas d'erreur, il retourn 0
-unsigned int f_create(){
+unsigned int f_create(char * path){
     unsigned int valReturn = 0;
     const char dirStr[17] = ".\\ressources\\";
     const char extension[6] = ".txt";
 
     char fileName[50];
-    printf("Saisissez le nom du fichier sans espace :\n ");
+/*    printf("Saisissez le nom du fichier sans espace :\n ");
     scanf("\n%s[^\n]", fileName);
+*/
+//    int pathLenght = strlen(fileName) + strlen(dirStr) + strlen(extension); // Longueur du path en int pour faire un malloc
 
-    int pathLenght = strlen(fileName) + strlen(dirStr) + strlen(extension); // Longueur du path en int pour faire un malloc
-
-    char* path = malloc(sizeof(char) * pathLenght + 1);
-
+//    char* path = malloc(sizeof(char) * pathLenght + 1);
+/*
     strcpy(path,dirStr);
     strcat(path,strcat(fileName, extension));
-
+*/
     char choice;
+
     FILE *f = fopen(path, "r");
+
+    free(path);
+
     do{
         fclose(f);
         do{
@@ -60,8 +64,6 @@ unsigned int f_create(){
     printf("Le fichier a ete cree avec succes !");
 
 
-    free(path);
-
     return valReturn;
 }
 //strcat(dirStr,strcat(fileName, extension))
@@ -72,7 +74,13 @@ unsigned int f_create(){
 /// unsigned int i = f_destroyer();
 /// Retourne 1 si le fichier a été supprimé
 /// En cas d'erreur, il retourn 0
-unsigned int f_destroyer(){
+unsigned int f_destroyer(FILE *fp) {
+
+    int exist = fp;
+    if (0 == exist) {
+        return 0;
+    }
+
     char fileName[50];
     printf("Saisissez le nom du fichier sans espace :\n ");
     scanf("\n%s[^\n]", fileName);
@@ -428,7 +436,14 @@ char * remove_spaces(const char *input, char *result)
   return result;
 }
 
-int fsearch (char * words,FILE* fp ) {
+
+
+unsigned int fsearch (char * words, char * path) {
+    FILE *fp = fopen(path,"r");
+    unsigned int exist = fExiste(fp);
+    if (0 == exist) {
+        return 0;
+    }
 
     char line[1024];
     char ch = getc ( fp );

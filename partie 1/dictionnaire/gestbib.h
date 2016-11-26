@@ -8,7 +8,7 @@
 /// unsigned int i = f_create();
 /// Retourne 1 si le fichier a été créé
 /// En cas d'erreur, il retourn 0
-unsigned int f_create();
+unsigned int f_create(char * path);
 
 
 /// Supprime un fichier en prenant en paramètre le
@@ -85,6 +85,6 @@ unsigned int wordSuppr();
 char * remove_spaces(const char *input, char *result);
 
 // cherche un mot et printf si oui ou non le mot est dans le fichier
-void fsearch (char * words,FILE *fp);
+unsigned int fsearch (char * words,char *fp);
 
 #endif // GESTBIB_H_INCLUDED

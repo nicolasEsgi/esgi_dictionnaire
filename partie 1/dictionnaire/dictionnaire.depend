@@ -77,3 +77,15 @@
 	"gestbib.h"
 	<sys/types.h>
 
+1480168014 source:/home/ahmed/Desktop/dico/esgi_dictionnaire/partie 1/dictionnaire/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<dirent.h>
+	"gestbib.h"
+	<sys/types.h>
+
+1480169333 /home/ahmed/Desktop/dico/esgi_dictionnaire/partie 1/dictionnaire/gestbib.h
+
