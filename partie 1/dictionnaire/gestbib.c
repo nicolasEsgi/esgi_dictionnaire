@@ -63,8 +63,7 @@ unsigned int f_create(){
     free(path);
 
     return valReturn;
-}
-//strcat(dirStr,strcat(fileName, extension))
+}//strcat(dirStr,strcat(fileName, extension))
 
 /// Supprime un fichier en prenant en paramètre le
 /// le chemin du fichier
@@ -72,7 +71,13 @@ unsigned int f_create(){
 /// unsigned int i = f_destroyer();
 /// Retourne 1 si le fichier a été supprimé
 /// En cas d'erreur, il retourn 0
-unsigned int f_destroyer(){
+unsigned int f_destroyer(FILE *fp) {
+
+    int exist = fp;
+    if (0 == exist) {
+        return 0;
+    }
+
     char fileName[50];
     printf("Saisissez le nom du fichier sans espace :\n ");
     scanf("\n%s[^\n]", fileName);
@@ -423,7 +428,15 @@ char * remove_spaces(const char *input, char *result)
   return result;
 }
 
-unsigned int fsearch (char * words,FILE* fp ) {
+
+
+unsigned int fsearch (char * words, char * path) {
+    FILE *fp = fopen(path,"r");
+    unsigned int exist = fExiste(fp);
+    if (0 == exist) {
+        return 0;
+    }
+
 
     char line[1024];
     char ch = getc ( fp );
