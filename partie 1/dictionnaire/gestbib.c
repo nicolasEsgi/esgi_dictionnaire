@@ -20,7 +20,7 @@ unsigned int f_create(){
     const char extension[6] = ".txt";
 
     char fileName[50];
-    printf("Saisissez le nom du fichier sans espace :\n ");
+    printf("Saisissez le nom du fichier sans espace :\n");
     scanf("\n%s[^\n]", fileName);
 
     int pathLenght = strlen(fileName) + strlen(dirStr) + strlen(extension); // Longueur du path en int pour faire un malloc
@@ -32,15 +32,16 @@ unsigned int f_create(){
 
     char choice;
     FILE *f = fopen(path, "r");
-    do{
+    int result = fExiste(f);
+    while((result != 1) || (((choice != 'n') || (choice != 'N')))){
         fclose(f);
         do{
-            printf("Le fichier existe deja !\nVoulez-vous renommer %s ?\n Si non le fichier %s sera ecrase. [O/N] : ", fileName, fileName);
+            printf("Le fichier existe deja !\nVoulez-vous renommer %s ?\nSi non le fichier %s sera ecrase. [O/N] : ", fileName, fileName);
             scanf("\n%s[^\n]", &choice);
         }while(!(choice == 'O' || choice == 'N'
                || choice == 'o' || 'n' == choice));
         if(choice == 'O' || choice == 'o'){
-            printf("Saisissez un nouveau nom sans espace :\n ");
+            printf("Saisissez un nouveau nom sans espace :\n");
             scanf("\n%s[^\n]", fileName);
 
             strcpy(path,dirStr);
@@ -48,8 +49,8 @@ unsigned int f_create(){
         }else{
             break;
         }
+    }
 
-    }while((fExiste(f) != 1) && ((choice != 'n') || (choice != 'N')));
 
     f = fopen(path, "w+");
     if(f != NULL){
@@ -57,13 +58,17 @@ unsigned int f_create(){
         valReturn = 1;
     }
 
-    printf("Le fichier a ete cree avec succes !");
+    printf("Le fichier a ete cree avec succes !\n");
 
 
     free(path);
 
     return valReturn;
+
 }//strcat(dirStr,strcat(fileName, extension))
+
+
+
 
 /// Supprime un fichier en prenant en paramètre le
 /// le chemin du fichier
@@ -71,39 +76,22 @@ unsigned int f_create(){
 /// unsigned int i = f_destroyer();
 /// Retourne 1 si le fichier a été supprimé
 /// En cas d'erreur, il retourn 0
-unsigned int f_destroyer(FILE *fp) {
-
-    int exist = fp;
-    if (0 == exist) {
-        return 0;
-    }
-
-    char fileName[50];
-    printf("Saisissez le nom du fichier sans espace :\n ");
-    scanf("\n%s[^\n]", fileName);
-    const char dirStr[17] = ".\\ressources\\";
-    const char extension[6] = ".txt";
-    int pathLenght = strlen(fileName) + strlen(dirStr) + strlen(extension); // Longueur du path en int pour faire un malloc
-    char* path = malloc(sizeof(char) * pathLenght + 1);
-
-    strcpy(path,dirStr);
-    strcat(path,strcat(fileName, extension));
+unsigned int f_destroyer(char* path) {
 
     FILE* f = fopen(path, "r");
+    int result = fExiste(f);
 
-    if(f == NULL){
+    if(result == 0){
         printf("Le fichier n'existe pas !");
-        fclose(f);
         return 0;
     }
     fclose(f);
 
     // Confirmation utilisateur
     int ret = remove(path);
-    free(path);
     if(ret == 0)
     {
-       printf("Fichier supprimé avec succes !");
+       printf("Fichier supprime avec succes !");
        return 1;
     }
     else
@@ -111,6 +99,8 @@ unsigned int f_destroyer(FILE *fp) {
        printf("Erreur : Suppression impossible !");
        return 0;
     }
+
+    free(path);
 }
 
 
@@ -361,17 +351,12 @@ unsigned int wordInsert(char* path){
     remove(path);
     rename(".\\ressources\\temp.txt", path);
     remove(".\\ressources\\temp.txt");
+    free(path);
     return 1;
 }
 
-unsigned int wordSuppr(){
-    char folder[250] = ".\\ressources\\";
-    const char fName[100] = "test";
-    const char fextension[5] = ".txt";
-    strcat (folder, fName);
-    strcat (folder, fextension);
-    printf("%s\n", folder); // DEBUGGAGE
-    FILE* fSource = fopen(folder, "r"); // ecriture lecture
+unsigned int wordSuppr(char* path){
+    FILE* fSource = fopen(path, "r"); // ecriture lecture
     int result = fExiste(fSource);
     if(result == 0){
         printf("Le fichier n'exite pas");
@@ -400,15 +385,17 @@ unsigned int wordSuppr(){
                 }
             }
         }
+
+    fclose(fSource);
+    fclose(fSortie);
+    remove(path);
+    rename(".\\ressources\\temp.txt", path);
+    remove(".\\ressources\\temp.txt");
+    free(path);
     if(resSearch == 0){
         printf("Le mot n'est pas present dans le dictionnaire\n");
         return 0;
     }
-    fclose(fSource);
-    fclose(fSortie);
-    remove(folder);
-    rename(".\\ressources\\temp.txt", folder);
-    remove(".\\ressources\\temp.txt");
     return 1;   // OK
 }
 

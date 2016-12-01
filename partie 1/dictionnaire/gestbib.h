@@ -17,7 +17,7 @@ unsigned int f_create();
 /// unsigned int i = f_destroyer();
 /// Retourne 1 si le fichier a été supprimé
 /// En cas d'erreur, il retourn 0
-unsigned int f_destroyer();
+unsigned int f_destroyer(char* path);
 
 
 // -------------------------------------------------
@@ -77,7 +77,7 @@ unsigned int wordInsert(char* fSource);
  *      Ne prends rien en parametre
  *      Retourne 0 en cas d'erreur sinon 1
  */
-unsigned int wordSuppr();
+unsigned int wordSuppr(char* path);
 
 // -------------------------------------------------------------------------------
 
@@ -86,7 +86,7 @@ char * remove_spaces(const char *input, char *result);
 
 // cherche un mot et printf si oui ou non le mot est dans le fichier
 
-unsigned int fsearch (char * words,char *fp);
+unsigned int fsearch (char * words, char * path);
 
 
 #endif // GESTBIB_H_INCLUDED
