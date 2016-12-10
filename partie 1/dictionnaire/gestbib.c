@@ -30,36 +30,29 @@ unsigned int f_create(){
     strcpy(path,dirStr);
     strcat(path,strcat(fileName, extension));
 
-    char choice = 'x';
+    char choice;
     FILE *f = fopen(path, "r");
-    // int result = fExiste(f);
-    if(fExiste(f) == 1){
-        while(fExiste(f) != 1 || choice != 'n' || choice != 'N'){
-            fclose(f);
-            if(fExiste(f) == 0){
-                choice = 'O';
-            }else{
-                choice = 'X';
-            }
-            while(!(choice == 'O' || choice == 'N'
-                   || choice == 'o' || 'n' == choice)){
-                printf("Le fichier existe deja !\nVoulez-vous renommer %s ?\nSi non le fichier %s sera ecrase. [O/N] : ", fileName, fileName);
-                scanf("\n%s[^\n]", &choice);
-            }
-            if(choice == 'O' || choice == 'o'){
-                printf("Saisissez un nouveau nom sans espace :\n");
-                scanf("\n%s[^\n]", fileName);
+    int result = fExiste(f);
+    // printf("%d", result);
+    while((result == 1) && (((choice != 'n') || (choice != 'N')))){
+        fclose(f);
+        do{
+            printf("Le fichier existe deja !\nVoulez-vous renommer %s ?\nSi non le fichier %s sera ecrase. [O/N] : ", fileName, fileName);
+            scanf("\n%s[^\n]", &choice);
+        }while(!(choice == 'O' || choice == 'N'
+               || choice == 'o' || 'n' == choice));
+        if(choice == 'O' || choice == 'o'){
+            printf("Saisissez un nouveau nom sans espace :\n");
+            scanf("\n%s[^\n]", fileName);
 
-                strcpy(path,dirStr);
-                strcat(path,strcat(fileName, extension));
-            }else{
-                break;
-            }
+            strcpy(path,dirStr);
+            strcat(path,strcat(fileName, extension));
+            f = fopen(path, "r");
+            result = fExiste(f);
+        }else{
+            break;
         }
     }
-
-
-
     f = fopen(path, "w+");
     if(f != NULL){
         fclose(f);
@@ -73,8 +66,7 @@ unsigned int f_create(){
 
     return valReturn;
 
-}//strcat(dirStr,strcat(fileName, extension))
-
+}
 
 
 
