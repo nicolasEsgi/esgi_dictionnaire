@@ -89,3 +89,25 @@
 
 1480170053 /home/ahmed/Desktop/dico/esgi_dictionnaire/partie 1/dictionnaire/gestbib.h
 
+1480969894 source:c:\users\rjeya\documents\esgi\c\esgi_dictionnaire\esgi_dictionnaire\partie 1\dictionnaire\gestbib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<dirent.h>
+	"gestbib.h"
+	<sys/types.h>
+
+1480758808 c:\users\rjeya\documents\esgi\c\esgi_dictionnaire\esgi_dictionnaire\partie 1\dictionnaire\gestbib.h
+
+1480763816 source:c:\users\rjeya\documents\esgi\c\esgi_dictionnaire\esgi_dictionnaire\partie 1\dictionnaire\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<dirent.h>
+	"gestbib.h"
+	<sys/types.h>
+

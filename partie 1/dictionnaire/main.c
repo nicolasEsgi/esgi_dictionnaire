@@ -14,13 +14,13 @@
 
 int main(int argc, char** argv)
 {
-    //startMenu();
+    startMenu();
     //f_create(); // ->> fonctionne
 
-    char* strPath;
-    strPath = fUse();
+    //char* strPath;
+    //strPath = fUse();
     //wordInsert(strPath); // ->> fonctionne
-    wordSuppr(strPath); // ->> fonctionne
+    // wordSuppr(strPath); // ->> fonctionne
 
     // f_destroyer(strPath); ->> fonctionne
     return 0;

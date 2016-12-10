@@ -33,7 +33,8 @@ unsigned int f_create(){
     char choice;
     FILE *f = fopen(path, "r");
     int result = fExiste(f);
-    while((result != 1) || (((choice != 'n') || (choice != 'N')))){
+    // printf("%d", result);
+    while((result == 1) && (((choice != 'n') || (choice != 'N')))){
         fclose(f);
         do{
             printf("Le fichier existe deja !\nVoulez-vous renommer %s ?\nSi non le fichier %s sera ecrase. [O/N] : ", fileName, fileName);
@@ -46,12 +47,12 @@ unsigned int f_create(){
 
             strcpy(path,dirStr);
             strcat(path,strcat(fileName, extension));
+            f = fopen(path, "r");
+            result = fExiste(f);
         }else{
             break;
         }
     }
-
-
     f = fopen(path, "w+");
     if(f != NULL){
         fclose(f);
@@ -65,8 +66,7 @@ unsigned int f_create(){
 
     return valReturn;
 
-}//strcat(dirStr,strcat(fileName, extension))
-
+}
 
 
 
@@ -144,7 +144,7 @@ void startMenu(){
     const char folder[100] = ".\\ressources\\";
 
     printf("Bienvenue dans notre dictionnaire.\n");
-    printf("/!\\ Attention chaque saisie est sensible a la casse.\n\n");
+    printf("/!\\ Attention chaque saisie est sensible a la casse.\nTappez sur la touche Entree pour continuer !\n");
     getchar();
 
     do{
@@ -163,6 +163,9 @@ void startMenu(){
     DIR* repertory = opendir(folder);
     switch(answer){
         case creer:
+            if(f_create() == 0){
+                printf("Une erreur est survenue !");
+            }
             break;
         case modifier:
             break;
