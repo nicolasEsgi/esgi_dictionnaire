@@ -8,11 +8,11 @@
 
 
 
-/// Crée un fichier en prenant en paramètre le
+/// Crï¿½e un fichier en prenant en paramï¿½tre le
 /// le chemin du fichier
 /// Exemple :
 /// unsigned int i = f_create();
-/// Retourne 1 si le fichier a été créé
+/// Retourne 1 si le fichier a ï¿½tï¿½ crï¿½ï¿½
 /// En cas d'erreur, il retourn 0
 unsigned int f_create(){
     unsigned int valReturn = 0;
@@ -76,16 +76,15 @@ unsigned int f_create(){
 
     return valReturn;
 
-}//strcat(dirStr,strcat(fileName, extension))
+}
 
 
 
-
-/// Supprime un fichier en prenant en paramètre le
+/// Supprime un fichier en prenant en paramï¿½tre le
 /// le chemin du fichier
 /// Exemple :
 /// unsigned int i = f_destroyer();
-/// Retourne 1 si le fichier a été supprimé
+/// Retourne 1 si le fichier a ï¿½tï¿½ supprimï¿½
 /// En cas d'erreur, il retourn 0
 unsigned int f_destroyer(char* path) {
 
@@ -120,8 +119,8 @@ unsigned int f_destroyer(char* path) {
 
 /*
  *      Qu'est-ce que c'est sys/types ?
- *      Cela fait partie des changements dont j'ai parlé précédemment. Ces lignes de codes signifient :
- *      « Si on n'utilise pas un système d'exploitation Windows, alors on inclut sys/types.h ».
+ *      Cela fait partie des changements dont j'ai parlï¿½ prï¿½cï¿½demment. Ces lignes de codes signifient :
+ *      ï¿½ Si on n'utilise pas un systï¿½me d'exploitation Windows, alors on inclut sys/types.h ï¿½.
  */
 #ifndef WIN32
 
@@ -130,7 +129,7 @@ unsigned int f_destroyer(char* path) {
 #endif
 
 /*
- *      Enumération pour le menu du début
+ *      Enumï¿½ration pour le menu du dï¿½but
  *      avec les code ASCII (49 == 1)
  */
 
@@ -145,7 +144,7 @@ enum reponseStartMenu{
 
 
 /*
- *      Fonction qui lance le menu du début
+ *      Fonction qui lance le menu du dï¿½but
  */
 
 void startMenu(){
@@ -156,6 +155,7 @@ void startMenu(){
     printf("Appuyez sur ENTRER pour continuer.\n\n");
     getchar();
 
+<<<<<<< HEAD
     while(1){
         do{
              system("cls"); // clear la cmd
@@ -183,14 +183,68 @@ void startMenu(){
                 exit(EXIT_SUCCESS);
                 break;
         }
+=======
+    do{
+         system("cls"); // clear la cmd
+         printf("1 - Creer un dictionnaire\n");
+         printf("2 - Modifier un dictionnaire\n");
+         printf("3 - Effectuer une recherche\n");
+         printf("4 - Parcourir les dictionnaires\n");
+         printf("5 - Supprimer\n");
+         printf("6 - Quitter\n");
+         printf("\nVotre choix -> ");
+         scanf("\n%[^\n]", &answer);
+    }while(answer<49 || answer>55);
+
+    unsigned int result;
+    DIR* repertory = opendir(folder);
+    switch(answer){
+        case creer:
+            if(f_create() == 0){
+                printf("Une erreur est survenue !");
+            }
+            break;
+        case modifier:
+
+            break;
+        case recherche:
+            break;
+        case parcourir:
+            result = dListe(repertory);
+
+            if(result == 0){
+                printf("Probleme d'ouverture du dossier");
+            }else{
+
+                printf("Que voulez-vous faire ?\n");
+                printf("1 - Utiliser un dictionnaire\n");
+                printf("2 - Retour au menu principal\n");
+                printf("\nVotre choix -> ");
+                scanf("\n%[^\n]", &answer);
+                if(answer == 49){ // == 1
+                    fUse();
+                }
+            }
+            break;
+        case supprimer:
+            // f_destroyer(path);
+            break;
+        case quitter:
+            exit(EXIT_SUCCESS);
+            break;
+        default:
+            printf("default --- %d", (int)answer);
+            break;
+
+>>>>>>> 9eb3fca09d736cd2d707230b5fa942832ca5da0b
     }
 }
 
 
 
 /*
- *      Fonction vérifie si l'éxistance du fichier (option r)
- *      Prend un FILE en paramètre
+ *      Fonction vï¿½rifie si l'ï¿½xistance du fichier (option r)
+ *      Prend un FILE en paramï¿½tre
  *      Retourne 0 en cas d'erreur sinon 1
  */
 
@@ -206,7 +260,7 @@ unsigned int fExiste(FILE* fileToTest){
 
 /*
  *      Fonction qui liste un repertoire
- *      Prends un DIR en paramètre
+ *      Prends un DIR en paramï¿½tre
  *      Retourne 0 en cas d'erreur sinon 1
  */
 
@@ -218,8 +272,8 @@ unsigned int dListe(DIR* rep){
 
     struct dirent* fichierLu = NULL; // Vers structure dirent   // cette structure, elle simule le fichier du dossier qui sera lu
     char* format;
-    //fichierLu = readdir(rep); // On lit le premier répertoire du dossier
-    while((fichierLu = readdir(rep)) != NULL){  //readdir() renvoie NULL s'il n'y a plus de fichier à lire.
+    //fichierLu = readdir(rep); // On lit le premier rï¿½pertoire du dossier
+    while((fichierLu = readdir(rep)) != NULL){  //readdir() renvoie NULL s'il n'y a plus de fichier ï¿½ lire.
         format = fNameDecoupage(fichierLu->d_name);
         if(format != NULL && strcmp(format, "txt") == 0){
             printf("%s\n", fichierLu->d_name);
@@ -227,16 +281,16 @@ unsigned int dListe(DIR* rep){
     }
 
     free(format);
-    //fichierLu = readdir(rep); // On lit le premier répertoire du dossier
+    //fichierLu = readdir(rep); // On lit le premier rï¿½pertoire du dossier
     if(closedir(rep) == -1){
         printf("Dossier mal fermer\n");
-        return 0; // Dossier mal fermé
+        return 0; // Dossier mal fermï¿½
     }
 
     return 1; // OK
 
-    /* Pour savoir quel fichier readdir() doit lire, un curseur virtuel est créé :
-     * à chaque appel de cette fonction(), le curseur avance d'un pas.
+    /* Pour savoir quel fichier readdir() doit lire, un curseur virtuel est crï¿½ï¿½ :
+     * ï¿½ chaque appel de cette fonction(), le curseur avance d'un pas.
      */
 }
 
@@ -280,8 +334,8 @@ char* fUse(){
 
 /*
  *      Fonction qui permet de connaitre l'extension du fichier
- *      Prendre une chaine de caractère en paramètre
- *      Retourne une chaine de caractère (MALLOC pensez à free)
+ *      Prendre une chaine de caractï¿½re en paramï¿½tre
+ *      Retourne une chaine de caractï¿½re (MALLOC pensez ï¿½ free)
  */
 
 char* fNameDecoupage(char* str){
@@ -399,6 +453,7 @@ void partWordSuppr(poubelle* p2){
     }
 }
 
+<<<<<<< HEAD
 void partSearch(poubelle* p2){
     if(p2->resSearch != 1){
         if(strcmp(p2->line,p2->words) == 0) {
@@ -498,7 +553,7 @@ unsigned int fsearch (char * words, char * path) {
     int index = 0;
     while ((ch = getc (fp)) != EOF ) { // parcours tant que pas fin de fichier
         if ( ch != '\n'){
-            line[index++] = ch; // insére à la suite tant que pas \n
+            line[index++] = ch; // insï¿½re ï¿½ la suite tant que pas \n
         }else {
             line[index] = '\0'; // remplace \n par un \0 fin de chaine
             index=0;
@@ -514,7 +569,7 @@ unsigned int fsearch (char * words, char * path) {
     fclose ( fp );
 
     if (1 != x) {
-        printf("mot introuvable");
+        printf("Mot introuvable");
         return 0;
     }
     return 1;
