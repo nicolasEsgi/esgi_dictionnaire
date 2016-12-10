@@ -2,6 +2,14 @@
 #define GESTBIB_H_INCLUDED
 
 
+typedef struct poubelle{
+    char words[30]; //d'apres la source d'Ahmed
+    char line[30];
+    FILE* fSource;
+    FILE* fSortie;
+    int resSearch;
+}poubelle;
+
 /// Crée un fichier en prenant en paramètre le
 /// le chemin du fichier
 /// Exemple :
@@ -79,10 +87,44 @@ unsigned int wordInsert(char* fSource);
  */
 unsigned int wordSuppr(char* path);
 
-// -------------------------------------------------------------------------------
+/*
+ *      Supprime l'ancien fichier
+ *      et renomme le fichier temp
+ *      avec le nom de l'ancien fichier
+ *      return 1 ou 0 si probleme
+ */
+unsigned int remplaceTempToDico(char* path, poubelle* p1);
 
-// trim les chaines de caractére et
-char * remove_spaces(const char *input, char *result);
+/*
+ *      Permet a l'utilisateur d'annuler
+ *      la foncrtion
+ *      Retourne 1 si OK
+ *      Sinon 0
+ */
+unsigned int annulprocedure(char* carac);
+
+/*
+ *      Début des fonction wordInsert et wordSuppr
+ */
+unsigned int jeSaisPasCommentLappeller(char* path, int func);
+
+void partSearch(poubelle* p2);
+
+void partWordInsert(poubelle* p2);
+
+void partWordSuppr(poubelle* p2);
+
+void escro(int nb);
+
+void typeErr(int tf, poubelle* p2);
+
+void laSuite(int tf, poubelle* p1);
+
+unsigned int jPP(char* path, int func, poubelle* p1);
+
+unsigned int wordSearch(char* path);
+
+// -------------------------------------------------------------------------------
 
 // cherche un mot et printf si oui ou non le mot est dans le fichier
 
