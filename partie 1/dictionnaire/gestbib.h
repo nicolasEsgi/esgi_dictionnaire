@@ -58,7 +58,7 @@ unsigned int dListe(DIR* rep);
  *      Retourne 0 en cas d'erreur sinon 1
  */
 
-char* fUse();
+FILE* fUse();
 
 
 
@@ -77,7 +77,7 @@ char* fNameDecoupage(char* str);
  *      Ne prends rien en parametre
  *      Retourne 0 en cas d'erreur sinon 1
  */
-unsigned int wordInsert(char* fSource);
+unsigned int wordInsert(char* path, FILE fi);
 
 
 /*
