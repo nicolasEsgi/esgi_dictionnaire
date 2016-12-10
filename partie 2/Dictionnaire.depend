@@ -70,3 +70,25 @@
 	"gestrech.h"
 	<sys/types.h>
 
+1479554946 source:c:\users\rjeya\documents\esgi\c\esgi_dictionnaire\esgi_dictionnaire\partie 2\gestbib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	"gestbib.h"
+
+1479554946 c:\users\rjeya\documents\esgi\c\esgi_dictionnaire\esgi_dictionnaire\partie 2\gestbib.h
+	"gestbib.h"
+
+1479554946 source:c:\users\rjeya\documents\esgi\c\esgi_dictionnaire\esgi_dictionnaire\partie 2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	"gestbib.h"
+	"gestrech.h"
+	<sys/types.h>
+	<stdio.h>
+
+1479554946 c:\users\rjeya\documents\esgi\c\esgi_dictionnaire\esgi_dictionnaire\partie 2\gestrech.h
+

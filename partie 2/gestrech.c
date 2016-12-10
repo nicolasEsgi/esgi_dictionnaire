@@ -31,8 +31,8 @@ unsigned int strDiff(char *str1Input, char *str2Input){
 
 int m_searchWithCharDiff(){
     FILE *fp = fopen ( "test.txt", "r");
-    char* line = malloc(sizeof(char)*1024 + 1);
-    char* words = malloc(sizeof(char) * 50);
+    char* line = malloc(sizeof(char)*30);
+    char* words = malloc(sizeof(char) * 30);
     words = "av ff"; // mot à chercher
     int seuil = 2;
     char ch;
