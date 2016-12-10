@@ -14,14 +14,22 @@
 
 int main(int argc, char** argv)
 {
+    int result = 0;
     startMenu();
-    //f_create(); // ->> fonctionne
+    /*result = f_create();//*/
 
-    //char* strPath;
-    //strPath = fUse();
-    //wordInsert(strPath); // ->> fonctionne
-    // wordSuppr(strPath); // ->> fonctionne
+    char* strPath;
 
-    // f_destroyer(strPath); ->> fonctionne
+    /*strPath = fUse();
+    result = wordInsert(strPath);//*/
+
+    /*strPath = fUse();
+    result = wordSuppr(strPath);//*/
+
+    /*strPath = fUse();
+    result = wordSearch(strPath);//*/
+
+    /*result = f_destroyer(strPath);
+    printf("DEBUG -> %d ||;\n", result); // DEBUGGAGE*/
     return 0;
 }
