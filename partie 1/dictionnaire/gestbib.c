@@ -168,6 +168,7 @@ void startMenu(){
             }
             break;
         case modifier:
+
             break;
         case recherche:
             break;
@@ -189,6 +190,7 @@ void startMenu(){
             }
             break;
         case supprimer:
+            // f_destroyer(path);
             break;
         case quitter:
             exit(EXIT_SUCCESS);
@@ -450,7 +452,7 @@ unsigned int fsearch (char * words, char * path) {
     fclose ( fp );
 
     if (1 != x) {
-        printf("mot introuvable");
+        printf("Mot introuvable");
         return 0;
     }
     return 1;
