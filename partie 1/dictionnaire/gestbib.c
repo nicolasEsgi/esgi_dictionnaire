@@ -135,10 +135,11 @@ unsigned int f_destroyer(char* path) {
 
 enum reponseStartMenu{
     creer = 49,
-    modifier = 50,
-    recherche = 51,
-    supprimer = 52,
-    quitter = 53
+    motInsert = 50,
+    motSuppr = 51,
+    recherche = 52,
+    supprimer = 53,
+    quitter = 54
 };
 
 
@@ -150,93 +151,48 @@ enum reponseStartMenu{
 void startMenu(){
     unsigned char answer = ' ';
     enum reponseStartMenu;
+    char* str;
     printf("Bienvenue dans notre dictionnaire.\n");
     printf("/!\\ Attention chaque saisie est sensible a la casse.\n");
     printf("Appuyez sur ENTRER pour continuer.\n\n");
     getchar();
 
-<<<<<<< HEAD
-    while(1){
-        do{
-             system("cls"); // clear la cmd
-             printf("1 - Creer un dictionnaire\n");
-             printf("2 - Modifier un dictionnaire\n");
-             printf("3 - Effectuer une recherche\n");
-             printf("4 - Supprimer\n");
-             printf("5 - Quitter\n");
-             printf("\nVotre choix -> ");
-             scanf("\n%[^\n]", &answer);
-        }while(answer<49 || answer>53);
-
-        unsigned int result;
-
-        switch(answer){
-            case creer:
-                break;
-            case modifier:
-                break;
-            case recherche:
-                break;
-            case supprimer:
-                break;
-            case quitter:
-                exit(EXIT_SUCCESS);
-                break;
-        }
-=======
     do{
          system("cls"); // clear la cmd
          printf("1 - Creer un dictionnaire\n");
-         printf("2 - Modifier un dictionnaire\n");
-         printf("3 - Effectuer une recherche\n");
-         printf("4 - Parcourir les dictionnaires\n");
-         printf("5 - Supprimer\n");
+         printf("2 - Inserer un mot\n");
+         printf("3 - Suprimer un mot\n");
+         printf("4 - Effectuer une recherche\n");
+         printf("5 - Supprimer un dictionnaire\n");
          printf("6 - Quitter\n");
          printf("\nVotre choix -> ");
          scanf("\n%[^\n]", &answer);
     }while(answer<49 || answer>55);
 
     unsigned int result;
-    DIR* repertory = opendir(folder);
     switch(answer){
         case creer:
-            if(f_create() == 0){
-                printf("Une erreur est survenue !");
-            }
+            f_create();
             break;
-        case modifier:
-
+        case motInsert:
+            str = fUse();
+            wordInsert(str);
+            break;
+        case motSuppr:
+            str = fUse();
+            wordSuppr(str);
             break;
         case recherche:
-            break;
-        case parcourir:
-            result = dListe(repertory);
-
-            if(result == 0){
-                printf("Probleme d'ouverture du dossier");
-            }else{
-
-                printf("Que voulez-vous faire ?\n");
-                printf("1 - Utiliser un dictionnaire\n");
-                printf("2 - Retour au menu principal\n");
-                printf("\nVotre choix -> ");
-                scanf("\n%[^\n]", &answer);
-                if(answer == 49){ // == 1
-                    fUse();
-                }
-            }
+            str = fUse();
+            wordSearch(str);
             break;
         case supprimer:
-            // f_destroyer(path);
+            str = fUse();
+            f_destroyer(str);
             break;
         case quitter:
             exit(EXIT_SUCCESS);
             break;
-        default:
-            printf("default --- %d", (int)answer);
-            break;
-
->>>>>>> 9eb3fca09d736cd2d707230b5fa942832ca5da0b
     }
 }
 
@@ -280,7 +236,7 @@ unsigned int dListe(DIR* rep){
         }
     }
 
-    free(format);
+//    free(format);
     //fichierLu = readdir(rep); // On lit le premier rï¿½pertoire du dossier
     if(closedir(rep) == -1){
         printf("Dossier mal fermer\n");
@@ -305,14 +261,15 @@ unsigned int dListe(DIR* rep){
  */
 
 char* fUse(){
-    DIR* repertory = opendir(".\\ressources\\");
-    char fName[50];
     const char folder[250] = ".\\ressources\\";
+    DIR* repertory;
+    char fName[50];
     const char fextension[5] = ".txt";
     int pathLenght = strlen(fName) + strlen(folder) + strlen(fextension); // Longueur du path en int pour faire un malloc;
     char* path = malloc(sizeof(char) * pathLenght + 1);
     FILE*f=fopen(path, "r");
     do{
+        repertory = opendir(folder);
         dListe(repertory);
         printf("Choisir un nom de dictionnaire\n [A for annul] : ");
         scanf("%s", fName);
@@ -322,11 +279,8 @@ char* fUse(){
         strcpy(path, folder);
         strcat (path, fName);
         strcat (path, fextension);
-        printf("%d\n",fExiste(f));
         f = fopen(path, "r");
-        printf("%d\n",fExiste(f));
     }while(fExiste(f) == 0);
-    printf("%d\n",fExiste(f));
     return path;
 }
 
@@ -372,11 +326,10 @@ unsigned int jPP(char* path, int func, poubelle* p1){
     return 1;
 }
 
-unsigned int wordInsert(char* path, FILE fi){
+unsigned int wordInsert(char* path){
     int typeFunc = 1;
     poubelle* p = malloc(sizeof(poubelle));
     p->resSearch = 0;
-    p->fSource = &fi;
     if(jPP(path, typeFunc, p) == 0){
         free(p);
         return 0; // ECHEC
@@ -389,28 +342,27 @@ unsigned int wordInsert(char* path, FILE fi){
 
 void laSuite(int tf, poubelle* p1){
     p1->fSortie = fopen(".\\ressources\\temp.txt", "w");
-    printf("\n0");
+    printf("%s@\n", p1->line);
     char ch = ' ';
     int index = 0;
     while ((ch = getc ( p1->fSource )) != EOF ) { // parcours tant que pas fin de fichier
-        printf("\n01");
         if ( ch != '\n'){
-            p1->line[index++] = ch;
-        printf("%c", ch); // insére à la suite tant que pas \n
+            p1->line[index++] = ch; // insére à la suite tant que pas \n
+            printf("%s || %c\n", p1->line, ch);
         }else {
             p1->line[index] = '\0'; // remplace \n par un \0 fin de chaine
             index=0;
             //--------------
+            printf("asxc\n");
             if(tf == 1){
-                printf("\n1");
                 // WORDINSERT
                 partWordInsert(p1);
-                printf("\n2");
             }else if(tf == 2){
                 // WORDSUPPR
                 partWordSuppr(p1);
             }else if(tf == 3){
                 // FSCEARCH
+                printf("poi");
                 partSearch(p1);
             }
             //--------------
@@ -419,7 +371,6 @@ void laSuite(int tf, poubelle* p1){
             break;
         }
     }
-    printf("\nsortis de boucle");
     typeErr(tf, p1);
 }
 
@@ -427,7 +378,6 @@ void partWordInsert(poubelle* p2){
     if (p2->resSearch != 0){
             printf("\n10");
         fprintf(p2->fSortie, "%s\n", p2->line);
-        printf("\n11");
     }else{
        if(strcmp(p2->words,p2->line) < 0) {
             fprintf(p2->fSortie, "%s\n", p2->words);
@@ -453,9 +403,9 @@ void partWordSuppr(poubelle* p2){
     }
 }
 
-<<<<<<< HEAD
 void partSearch(poubelle* p2){
     if(p2->resSearch != 1){
+            printf("DEBUG");
         if(strcmp(p2->line,p2->words) == 0) {
             printf("trouver");
             p2->resSearch = 1;
@@ -491,12 +441,16 @@ unsigned int wordSearch(char* path){
 }
 
 unsigned int remplaceTempToDico(char* path, poubelle* p1){
-    fclose(p1->fSource);
+    char* tmpPath = ".\\ressources\\temp.txt";
     fclose(p1->fSortie);
-    remove(path);
-    rename(".\\ressources\\temp.txt", path);
-    remove(".\\ressources\\temp.txt");
-    free(path);
+    fclose(p1->fSource);
+    printf("%s|", path);
+    printf("RM1 - %d\n", remove(path));
+    printf("RN - %d\n", rename(tmpPath, path));
+    printf("%s|", path);
+    printf("%s|", tmpPath);
+    printf("RM2 - %d\n", remove(tmpPath));
+    //free(path);
     return 1;   // OK
 }
 

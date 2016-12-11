@@ -14,11 +14,15 @@
 
 int main(int argc, char** argv)
 {
+    //char* path = ".\\ressources\\nique.txt";
+    //rename(".\\ressources\\temp.txt", path);
+    //remove(path);
+
     int result = 0;
     startMenu();
     /*result = f_create();//*/
 
-    char* strPath;
+    //char* strPath;
 
     /*strPath = fUse();
     result = wordInsert(strPath);//*/

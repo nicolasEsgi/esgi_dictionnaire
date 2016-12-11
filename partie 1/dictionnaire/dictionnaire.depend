@@ -55,7 +55,7 @@
 	"gestbib.h"
 	<sys/types.h>
 
-1481371180 source:c:\users\nico\documents\esgi\projets\github_projet\esgi_dictionnaire\partie 1\dictionnaire\main.c
+1481456412 source:c:\users\nico\documents\esgi\projets\github_projet\esgi_dictionnaire\partie 1\dictionnaire\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -65,9 +65,9 @@
 	"gestbib.h"
 	<sys/types.h>
 
-1481376882 c:\users\nico\documents\esgi\projets\github_projet\esgi_dictionnaire\partie 1\dictionnaire\gestbib.h
+1481384737 c:\users\nico\documents\esgi\projets\github_projet\esgi_dictionnaire\partie 1\dictionnaire\gestbib.h
 
-1481376874 source:c:\users\nico\documents\esgi\projets\github_projet\esgi_dictionnaire\partie 1\dictionnaire\gestbib.c
+1481457231 source:c:\users\nico\documents\esgi\projets\github_projet\esgi_dictionnaire\partie 1\dictionnaire\gestbib.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
