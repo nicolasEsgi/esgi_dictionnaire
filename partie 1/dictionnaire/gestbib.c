@@ -8,14 +8,13 @@
 
 
 
-/// Crï¿½e un fichier en prenant en paramï¿½tre le
+/// Cree un fichier en prenant en parametre le
 /// le chemin du fichier
 /// Exemple :
 /// unsigned int i = f_create();
-/// Retourne 1 si le fichier a ï¿½tï¿½ crï¿½ï¿½
+/// Retourne 1 si le fichier a ete cree
 /// En cas d'erreur, il retourn 0
 unsigned int f_create(){
-    unsigned int valReturn = 0;
     const char dirStr[17] = ".\\ressources\\";
     const char extension[6] = ".txt";
 
@@ -23,7 +22,7 @@ unsigned int f_create(){
     printf("Saisissez le nom du fichier sans espace :\n [A fr annul] :");
     scanf("\n%s[^\n]", fileName);
 
-    if(annulprocedure(fileName) == 1){
+    if(annulProcedure(fileName) == 1){
         return 0;
     }
 
@@ -63,28 +62,20 @@ unsigned int f_create(){
             break;
         }
     }
-    f = fopen(path, "w+");
-    if(f != NULL){
-        fclose(f);
-        valReturn = 1;
-    }
-
-    printf("Le fichier a ete cree avec succes !\n");
-
 
     free(path);
 
-    return valReturn;
+    return 1;
 
 }
 
 
 
-/// Supprime un fichier en prenant en paramï¿½tre le
+/// Supprime un fichier en prenant en parametre le
 /// le chemin du fichier
 /// Exemple :
 /// unsigned int i = f_destroyer();
-/// Retourne 1 si le fichier a ï¿½tï¿½ supprimï¿½
+/// Retourne 1 si le fichier a ete supprime
 /// En cas d'erreur, il retourn 0
 unsigned int f_destroyer(char* path) {
 
@@ -99,18 +90,14 @@ unsigned int f_destroyer(char* path) {
 
     // Confirmation utilisateur
     int ret = remove(path);
-    if(ret == 0)
-    {
-       printf("Dictionnaire supprime avec succes !");
-       return 1;
-    }
-    else
+    if(ret != 0)
     {
        printf("Erreur : Suppression du dictionnaire impossible !");
        return 0;
     }
 
     free(path);
+    return 1;
 }
 
 
@@ -119,8 +106,8 @@ unsigned int f_destroyer(char* path) {
 
 /*
  *      Qu'est-ce que c'est sys/types ?
- *      Cela fait partie des changements dont j'ai parlï¿½ prï¿½cï¿½demment. Ces lignes de codes signifient :
- *      ï¿½ Si on n'utilise pas un systï¿½me d'exploitation Windows, alors on inclut sys/types.h ï¿½.
+ *      Cela fait partie des changements dont j'ai parlï¿½ precedemment. Ces lignes de codes signifient :
+ *      Si on n'utilise pas un systeme d'exploitation Windows, alors on inclut sys/types.h.
  */
 #ifndef WIN32
 
@@ -129,7 +116,7 @@ unsigned int f_destroyer(char* path) {
 #endif
 
 /*
- *      Enumï¿½ration pour le menu du dï¿½but
+ *      Enumération pour le menu du début
  *      avec les code ASCII (49 == 1)
  */
 
@@ -145,7 +132,7 @@ enum reponseStartMenu{
 
 
 /*
- *      Fonction qui lance le menu du dï¿½but
+ *      Fonction qui lance le menu du début
  */
 
 void startMenu(){
@@ -155,52 +142,69 @@ void startMenu(){
     printf("Bienvenue dans notre dictionnaire.\n");
     printf("/!\\ Attention chaque saisie est sensible a la casse.\n");
     printf("Appuyez sur ENTRER pour continuer.\n\n");
-    getchar();
+while(1){
+        getch();
+        do{
+             system("cls"); // clear la cmd
+             printf("\tMENU PRINCIPAL\n\n");
+             printf("1 - Creer un dictionnaire\n");
+             printf("2 - Inserer un mot\n");
+             printf("3 - Suprimer un mot\n");
+             printf("4 - Effectuer une recherche\n");
+             printf("5 - Supprimer un dictionnaire\n");
+             printf("6 - Quitter\n");
+             printf("\nVotre choix -> ");
+             scanf("\n%[^\n]", &answer);
+        }while(answer<49 || answer>54);
 
-    do{
-         system("cls"); // clear la cmd
-         printf("1 - Creer un dictionnaire\n");
-         printf("2 - Inserer un mot\n");
-         printf("3 - Suprimer un mot\n");
-         printf("4 - Effectuer une recherche\n");
-         printf("5 - Supprimer un dictionnaire\n");
-         printf("6 - Quitter\n");
-         printf("\nVotre choix -> ");
-         scanf("\n%[^\n]", &answer);
-    }while(answer<49 || answer>55);
-
-    unsigned int result;
-    switch(answer){
-        case creer:
-            f_create();
-            break;
-        case motInsert:
-            str = fUse();
-            wordInsert(str);
-            break;
-        case motSuppr:
-            str = fUse();
-            wordSuppr(str);
-            break;
-        case recherche:
-            str = fUse();
-            wordSearch(str);
-            break;
-        case supprimer:
-            str = fUse();
-            f_destroyer(str);
-            break;
-        case quitter:
-            exit(EXIT_SUCCESS);
-            break;
+        switch(answer){
+            case creer:
+                if(f_create() == 1){
+                    printf("Le dictionnaire a ete cree\n");
+                }
+                break;
+            case motInsert:
+                str = fUse();
+                if(str == NULL){
+                    break;
+                }
+                mainWord(str, 1);
+                break;
+            case motSuppr:
+                str = fUse();
+                if(str == NULL){
+                    break;
+                }
+                mainWord(str, 2);
+                break;
+            case recherche:
+                str = fUse();
+                if(str == NULL){
+                    break;
+                }
+                mainWord(str, 3);
+                break;
+            case supprimer:
+                str = fUse();
+                if(str == NULL){
+                    break;
+                }
+                if(f_destroyer(str) == 1){
+                    printf("Dictionnaire supprime avec succes !\n");
+                }
+                break;
+            case quitter:
+                exit(EXIT_SUCCESS);
+                break;
+        }
     }
 }
 
 
 
 /*
- *      Fonction vï¿½rifie si l'ï¿½xistance du fichier (option r)
- *      Prend un FILE en paramï¿½tre
+ *      Fonction verifie si l'existance du fichier (option r)
+ *      Prend un FILE en parametre
  *      Retourne 0 en cas d'erreur sinon 1
  */
 
@@ -216,7 +220,7 @@ unsigned int fExiste(FILE* fileToTest){
 
 /*
  *      Fonction qui liste un repertoire
- *      Prends un DIR en paramï¿½tre
+ *      Prends un DIR en parametre
  *      Retourne 0 en cas d'erreur sinon 1
  */
 
@@ -228,16 +232,17 @@ unsigned int dListe(DIR* rep){
 
     struct dirent* fichierLu = NULL; // Vers structure dirent   // cette structure, elle simule le fichier du dossier qui sera lu
     char* format;
-    //fichierLu = readdir(rep); // On lit le premier rï¿½pertoire du dossier
-    while((fichierLu = readdir(rep)) != NULL){  //readdir() renvoie NULL s'il n'y a plus de fichier ï¿½ lire.
+    //fichierLu = readdir(rep); // On lit le premier repertoire du dossier
+    while((fichierLu = readdir(rep)) != NULL){  //readdir() renvoie NULL s'il n'y a plus de fichier a lire.
         format = fNameDecoupage(fichierLu->d_name);
         if(format != NULL && strcmp(format, "txt") == 0){
-            printf("%s\n", fichierLu->d_name);
+            printf("\t%s\n", fichierLu->d_name);
         }
     }
+    printf("\n");
 
-//    free(format);
-    //fichierLu = readdir(rep); // On lit le premier rï¿½pertoire du dossier
+    free(format);
+    //fichierLu = readdir(rep); // On lit le premier repertoire du dossier
     if(closedir(rep) == -1){
         printf("Dossier mal fermer\n");
         return 0; // Dossier mal fermï¿½
@@ -245,8 +250,8 @@ unsigned int dListe(DIR* rep){
 
     return 1; // OK
 
-    /* Pour savoir quel fichier readdir() doit lire, un curseur virtuel est crï¿½ï¿½ :
-     * ï¿½ chaque appel de cette fonction(), le curseur avance d'un pas.
+    /* Pour savoir quel fichier readdir() doit lire, un curseur virtuel est cree :
+     * a chaque appel de cette fonction(), le curseur avance d'un pas.
      */
 }
 
@@ -254,9 +259,9 @@ unsigned int dListe(DIR* rep){
 
 /*
  *      Permet d'utiliser un dico choisi a la main
- *      Prend aucun paramètre
+ *      Prend aucun parametre
  *      Retourne le chemin du fichier
- *      Sinon null
+ *      Sinon NULL
  *      Retourne un STRING /!\ MALLOC
  */
 
@@ -269,11 +274,13 @@ char* fUse(){
     char* path = malloc(sizeof(char) * pathLenght + 1);
     FILE*f=fopen(path, "r");
     do{
+        system("cls");
+        printf("Voici les dictionnaires present.\n\n");
         repertory = opendir(folder);
         dListe(repertory);
         printf("Choisir un nom de dictionnaire\n [A for annul] : ");
         scanf("%s", fName);
-        if(annulprocedure(fName) == 1){
+        if(annulProcedure(fName) == 1){
             return NULL;
         }
         strcpy(path, folder);
@@ -287,9 +294,9 @@ char* fUse(){
 
 
 /*
- *      Fonction qui permet de connaitre l'extension du fichier
- *      Prendre une chaine de caractï¿½re en paramï¿½tre
- *      Retourne une chaine de caractï¿½re (MALLOC pensez ï¿½ free)
+ *      Fonction qui decoupe le nom du fichier et l'extension
+ *      Prendre une chaine de caractere en parametre
+ *      Retourne une chaine de caractere (MALLOC pensez a free)
  */
 
 char* fNameDecoupage(char* str){
@@ -301,71 +308,78 @@ char* fNameDecoupage(char* str){
     return res;
 }
 
-////////////////////////////////////////////////////////////////////////////////////
+
 /*
- *      Fonction qui permet l'insertion d'un mot dans le dictionnaire
- *      Ne prends rien en parametre
- *      Ne renvoi rien
+ *      Fonction qui test l'exitance du fichier
+ *      et saisit du mot
+ *      Retourne 0 en cas d'erreur
+ *      1 si tout est correct
  */
 
-
-unsigned int jPP(char* path, int func, poubelle* p1){
-     p1->fSource = fopen(path, "r"); // ecriture lecture;
+unsigned int wordsScan(char* path, int func, poubelle* p1){
+     p1->fSource = fopen(path, "r"); // lecture
 
     if(fExiste(p1->fSource) == 0){
         printf("Le fichier n'exite pas");
         return 0; // ECHEC
     }
 
-    escro(func);
+    printPrompt(func);
 
     scanf("\n%s[^\n]", p1->words);
-    if(annulprocedure(p1->words) == 1){
+    if(annulProcedure(p1->words) == 1){
         return 0; // ECHEC
     }
     return 1;
 }
 
-unsigned int wordInsert(char* path){
-    int typeFunc = 1;
+/*
+ *      Fonction principale pour les traitements suivant
+ *      Insertion, suppresion de mots
+ *      Recherche de mot
+ *      Retourne 0 en cas d'erreur
+ *      1 si tout est bon
+ */
+unsigned int mainWord(char* path, int typeFunc){
     poubelle* p = malloc(sizeof(poubelle));
     p->resSearch = 0;
-    if(jPP(path, typeFunc, p) == 0){
+    if(wordsScan(path, typeFunc, p) == 0){
         free(p);
         return 0; // ECHEC
     }
-    laSuite(typeFunc, p);
-    remplaceTempToDico(path, p);
+    wordTraitement(typeFunc, p);
+    if(typeFunc != 3){
+        remplaceTempToDico(path, p);
+    }
     free(p);
     return 1;
 }
 
-void laSuite(int tf, poubelle* p1){
+/*
+ *      Fonction qui effectue le traitement demander
+ */
+void wordTraitement(int tf, poubelle* p1){
     p1->fSortie = fopen(".\\ressources\\temp.txt", "w");
     printf("%s@\n", p1->line);
     char ch = ' ';
     int index = 0;
     while ((ch = getc ( p1->fSource )) != EOF ) { // parcours tant que pas fin de fichier
         if ( ch != '\n'){
-            p1->line[index++] = ch; // insére à la suite tant que pas \n
+            p1->line[index++] = ch; // insere à la suite tant que pas \n
             printf("%s || %c\n", p1->line, ch);
         }else {
             p1->line[index] = '\0'; // remplace \n par un \0 fin de chaine
             index=0;
-            //--------------
-            printf("asxc\n");
             if(tf == 1){
                 // WORDINSERT
-                partWordInsert(p1);
+                traitementInsert(p1);
             }else if(tf == 2){
                 // WORDSUPPR
-                partWordSuppr(p1);
+                traitementSuppr(p1);
             }else if(tf == 3){
                 // FSCEARCH
-                printf("poi");
-                partSearch(p1);
+                traitementSearch(p1);
             }
-            //--------------
         }
         if((p1->resSearch == 1) && (tf == 3)){
             break;
@@ -374,9 +388,14 @@ void laSuite(int tf, poubelle* p1){
     typeErr(tf, p1);
 }
 
-void partWordInsert(poubelle* p2){
+
+/*
+ *      Fonction qui insert un mot
+ *      dans le dictionnaire choisit
+ *      Respect de l'ordre alphabétique
+ */
+void traitementInsert(poubelle* p2){
     if (p2->resSearch != 0){
-            printf("\n10");
         fprintf(p2->fSortie, "%s\n", p2->line);
     }else{
        if(strcmp(p2->words,p2->line) < 0) {
@@ -387,14 +406,19 @@ void partWordInsert(poubelle* p2){
         }else if (strcmp(p2->words,p2->line) == 0) {
             printf("Le mot existe deja\n");
             fprintf(p2->fSortie, "%s\n", p2->line);
-            p2->resSearch = 2; // Deja présent = 2
+            p2->resSearch = 2; // Deja present = 2
         }else{
             fprintf(p2->fSortie, "%s\n", p2->line);
         }
     }
 }
 
-void partWordSuppr(poubelle* p2){
+
+/*
+ *      Fonction qui supprime un mot
+ *      dans le dictionnaire choisit
+ */
+void traitementSuppr(poubelle* p2){
     if(strcmp(p2->words,p2->line) != 0) {
         fprintf(p2->fSortie, "%s\n", p2->line);
     }else{
@@ -403,7 +427,12 @@ void partWordSuppr(poubelle* p2){
     }
 }
 
-void partSearch(poubelle* p2){
+
+/*
+ *      Fonction qui cherche un mot
+ *      dans le dictionnaire choisit
+ */
+void traitementSearch(poubelle* p2){
     if(p2->resSearch != 1){
             printf("DEBUG");
         if(strcmp(p2->line,p2->words) == 0) {
@@ -413,33 +442,13 @@ void partSearch(poubelle* p2){
     }
 }
 
-unsigned int wordSuppr(char* path){
-    int typeFunc = 2;
-    poubelle* p = malloc(sizeof(poubelle));
-    p->resSearch = 0;
-    if(jPP(path, typeFunc, p) == 0){
-        free(p);
-        return 0; // ECHEC
-    }
-    laSuite(typeFunc, p);
-    remplaceTempToDico(path, p);
-    free(p);
-    return 1;
-}
-
-unsigned int wordSearch(char* path){
-    int typeFunc = 3;
-    poubelle* p = malloc(sizeof(poubelle));
-    p->resSearch = 0;
-    if(jPP(path, typeFunc, p) == 0){
-        free(p);
-        return 0; // ECHEC
-    }
-    laSuite(typeFunc, p);
-    free(p);
-    return 1;
-}
-
+////////////////////////////////////////////////////////////////////////////
+/*
+ *      Supprime l'ancien fichier
+ *      et renomme le fichier temp
+ *      avec le nom de l'ancien fichier
+ *      return 1 ou 0 si probleme
+ */
 unsigned int remplaceTempToDico(char* path, poubelle* p1){
     char* tmpPath = ".\\ressources\\temp.txt";
     fclose(p1->fSortie);
@@ -450,11 +459,17 @@ unsigned int remplaceTempToDico(char* path, poubelle* p1){
     printf("%s|", path);
     printf("%s|", tmpPath);
     printf("RM2 - %d\n", remove(tmpPath));
-    //free(path);
     return 1;   // OK
 }
+/////////////////////////////////////////////////////////////////////////////
 
-unsigned int annulprocedure(char* carac){
+/*
+ *      Permet a l'utilisateur d'annuler
+ *      la fonction
+ *      Retourne 1 si OK
+ *      Sinon 0
+ */
+unsigned int annulProcedure(char* carac){
     if ((strcmp(carac, "A") == 0) || (strcmp(carac, "a") == 0)){
         printf("Vous avez annule\n");
         return 1;
@@ -462,7 +477,11 @@ unsigned int annulprocedure(char* carac){
     return 0;
 }
 
-void escro(int nb){ // printPrompt
+
+/*
+ *      Fonction qui affiche un texte différent
+ */
+void printPrompt(int nb){
     switch(nb){
         case 1:
             printf("Saisir un mot a inserer -> [A for annul] : ");
@@ -476,6 +495,10 @@ void escro(int nb){ // printPrompt
     }
 }
 
+
+/*
+ *      Fonction qui gere les erreur de traitement
+ */
 void typeErr(int tf, poubelle* p2){
     if(p2->resSearch == 0){
         switch(tf){
@@ -491,7 +514,6 @@ void typeErr(int tf, poubelle* p2){
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////
 
 // --------------------------------------------------------------------
 
