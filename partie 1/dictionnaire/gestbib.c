@@ -122,11 +122,12 @@ unsigned int f_destroyer(char* path) {
 
 enum reponseStartMenu{
     creer = 49,
-    motInsert = 50,
-    motSuppr = 51,
-    recherche = 52,
-    supprimer = 53,
-    quitter = 54
+    importer = 50,
+    motInsert = 51,
+    motSuppr = 52,
+    recherche = 53,
+    supprimer = 54,
+    quitter = 55
 };
 
 
@@ -148,20 +149,24 @@ while(1){
              system("cls"); // clear la cmd
              printf("\tMENU PRINCIPAL\n\n");
              printf("1 - Creer un dictionnaire\n");
-             printf("2 - Inserer un mot\n");
-             printf("3 - Suprimer un mot\n");
-             printf("4 - Effectuer une recherche\n");
-             printf("5 - Supprimer un dictionnaire\n");
-             printf("6 - Quitter\n");
+             printf("2 - Importer un fichier txt\n");
+             printf("3 - Inserer un mot\n");
+             printf("4 - Suprimer un mot\n");
+             printf("5 - Effectuer une recherche\n");
+             printf("6 - Supprimer un dictionnaire\n");
+             printf("7 - Quitter\n");
              printf("\nVotre choix -> ");
              scanf("\n%[^\n]", &answer);
-        }while(answer<49 || answer>54);
+        }while(answer<49 || answer>55);
 
         switch(answer){
             case creer:
                 if(f_create() == 1){
                     printf("Le dictionnaire a ete cree\n");
                 }
+                break;
+            case importer:
+                //------------------------------>
                 break;
             case motInsert:
                 str = fUse();
