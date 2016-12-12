@@ -27,9 +27,9 @@ unsigned int f_create();
 /// En cas d'erreur, il retourn 0
 unsigned int f_destroyer(char* path);
 
-
-// -------------------------------------------------
-
+/*
+ *      Menu principale
+ */
 void startMenu();
 
 
@@ -73,19 +73,14 @@ char* fNameDecoupage(char* str);
 
 
 /*
- *      Fonction qui permet l'insertion d'un mot dans le dictionnaire
- *      Ne prends rien en parametre
- *      Retourne 0 en cas d'erreur sinon 1
+ *      Fonction principale pour les traitements suivant
+ *      Insertion, suppresion de mots
+ *      Recherche de mot
+ *      Retourne 0 en cas d'erreur
+ *      1 si tout est bon
  */
-unsigned int wordInsert(char* fSource);
+unsigned int mainWord(char* path, int typeFunc);
 
-
-/*
- *      Fonction qui permet la suppression d'un mot dans le dictionnaire
- *      Ne prends rien en parametre
- *      Retourne 0 en cas d'erreur sinon 1
- */
-unsigned int wordSuppr(char* path);
 
 /*
  *      Supprime l'ancien fichier
@@ -97,34 +92,58 @@ unsigned int remplaceTempToDico(char* path, poubelle* p1);
 
 /*
  *      Permet a l'utilisateur d'annuler
- *      la foncrtion
+ *      la fonction
  *      Retourne 1 si OK
  *      Sinon 0
  */
-unsigned int annulprocedure(char* carac);
+unsigned int annulProcedure(char* carac);
+
 
 /*
- *      Début des fonction wordInsert et wordSuppr
+ *      Fonction qui cherche un mot
+ *      dans le dictionnaire choisit
  */
-unsigned int jeSaisPasCommentLappeller(char* path, int func);
+void traitementSearch(poubelle* p2);
 
-void partSearch(poubelle* p2);
 
-void partWordInsert(poubelle* p2);
+/*
+ *      Fonction qui insert un mot
+ *      dans le dictionnaire choisit
+ *      Respect de l'ordre alphabétique
+ */
+void traitementInsert(poubelle* p2);
 
-void partWordSuppr(poubelle* p2);
+/*
+ *      Fonction qui supprime un mot
+ *      dans le dictionnaire choisit
+ */
+void traitementSuppr(poubelle* p2);
 
-void escro(int nb);
+/*
+ *      Fonction qui affiche un texte différent
+ */
+void printPrompt(int nb);
 
+/*
+ *      Fonction qui gere les erreur de traitement
+ */
 void typeErr(int tf, poubelle* p2);
 
-void laSuite(int tf, poubelle* p1);
 
-unsigned int jPP(char* path, int func, poubelle* p1);
+/*
+ *      Fonction qui effectue le traitement demander
+ */
+void wordTraitement(int tf, poubelle* p1);
 
-unsigned int wordSearch(char* path);
 
-// -------------------------------------------------------------------------------
+/*
+ *      Fonction qui test l'exitance
+ *      et moment ou l'on saisit le mot
+ *      Retourne 0 en cas d'erreur
+ *      1 si tout est correct
+ */
+unsigned int wordsScan(char* path, int func, poubelle* p1);
+
 
 // cherche un mot et printf si oui ou non le mot est dans le fichier
 
