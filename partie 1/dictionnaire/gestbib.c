@@ -6,6 +6,8 @@
 #include <dirent.h>     // Pour l'utilisation des dossiers
 #include "gestbib.h"
 
+#define SIZE 30 // Taille la plus grande d'un mots 'Hexakosioihexekontahexaphobie'
+#define LEN 30000 // nombre de mot moyens dans un dico
 
 
 /// Cree un fichier en prenant en parametre le
@@ -144,7 +146,7 @@ void startMenu(){
     printf("/!\\ Attention chaque saisie est sensible a la casse.\n");
     printf("Appuyez sur ENTRER pour continuer.\n\n");
 while(1){
-        getch();
+        getch(); //fonction systeme qui ne fonctionne pas sur tous les OS
         do{
              system("cls"); // clear la cmd
              printf("\tMENU PRINCIPAL\n\n");
@@ -519,6 +521,36 @@ void typeErr(int tf, poubelle* p2){
     }
 }
 
+/*
+ *      Fonction qui formate une chaine de caractéres
+ *      pour enlever les caractéres spéciaux & formater en capitalize les mots
+ */
+
+void Cap(char *string) {
+
+    int i;
+    int x = strlen(string);
+
+     for (i=0;i<x;i++) {
+         // parcours le nb de lettre et met à null les caractéres spéciaux
+         if(string[i] >= 32 && string[i] <= 64  || string[i] >= 122) {
+                string[i] = NULL;
+         }
+     }
+
+    for (i=0;i<x;i++) {
+
+         if( i == 0 && string[i] > 96 && string[i] < 123 ) {
+            string[i] -= 32;
+
+         }else if(i > 0 && string[i] > 64 && string[i] < 96) {
+            string[i] += 32;
+         }
+    }
+
+}
+
+
 
 // --------------------------------------------------------------------
 
@@ -555,3 +587,61 @@ unsigned int fsearch (char * words, char * path) {
     }
     return 1;
 }
+
+
+unsigned int txtToDico () {
+
+    char name[LEN][SIZE]; /* Data records */
+    char hold[LEN] ;
+    unsigned int i;
+    unsigned int j; /* indices of array */
+    unsigned int last ; /* index of last item in array */
+    printf("Veullez choisir entrer le nom du fichier txt");
+    char *txtName = fuse();
+    const char dicoName = {".\\ressources\\temp.txt"};
+
+    FILE *fTxt = fopen(txtName,"r");
+    FILE *fDico = fopen(dicoName,"w");
+
+    if(fExiste(fTxt) == 0) {
+        return 0; //Erreur
+    }
+
+    for(i = 0 ; !feof( fTxt ) ; i++ ) {
+        fscanf( fTxt, "%s", name[i] );
+        Capitalize(name[i]);
+    }
+    last = i - 1 ;
+    fclose( fTxt );
+
+    //trie à bull
+    for (i = last ; i > 0 ; i--) {
+        for (j = 1 ; j <= i ; j++) {
+            if(strcmp(name[j],name[j - 1]) == 0) {
+                strcpy(name[j-1],"");
+            }else if (strcmp(name[j],name[j - 1]) < 0) {
+                strcpy(hold,name[j]);
+                strcpy(name[j],name[j - 1]);
+                strcpy(name[j - 1],hold);
+            }
+        }
+    }
+    // ecriture dans le fichier temp
+    for (i = 0 ; i <= last ; i++) {
+        if( strcmp(name[i],"") != 0) {
+            if(i == last ) {
+                fprintf(fDico,"%s",name[i]);
+            }else {
+                fprintf(fDico,"%s\n",name[i]);
+            }
+        }
+    }
+
+    fclose(fDico);
+    remove(txtName);
+    rename(dicoName, txtName);
+
+        return 1;
+}
+
+

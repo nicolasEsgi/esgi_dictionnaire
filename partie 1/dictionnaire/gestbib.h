@@ -149,5 +149,19 @@ unsigned int wordsScan(char* path, int func, poubelle* p1);
 
 unsigned int fsearch (char * words, char * path);
 
+/*
+ *      Fonction qui formate une chaine de caractéres
+ *      pour enlever les caractéres spéciaux &
+ *      formater en capitalize les mots
+ */
+void Cap(char *string);
+
+
+/*
+ *      Fonction qui à partir d'un fichier txt
+ *      creer un fichier 'dico' qui met les mots
+ *      par ordre alphabétique en elevant les occurrences
+ */
+ int txttodico();
 
 #endif // GESTBIB_H_INCLUDED

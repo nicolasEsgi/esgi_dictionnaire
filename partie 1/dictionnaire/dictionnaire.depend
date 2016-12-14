@@ -111,3 +111,25 @@
 	"gestbib.h"
 	<sys/types.h>
 
+1481617089 source:/home/ahmed/Desktop/github/esgi_dictionnaire/partie 1/dictionnaire/gestbib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<dirent.h>
+	"gestbib.h"
+	<sys/types.h>
+
+1481618296 /home/ahmed/Desktop/github/esgi_dictionnaire/partie 1/dictionnaire/gestbib.h
+
+1481617089 source:/home/ahmed/Desktop/github/esgi_dictionnaire/partie 1/dictionnaire/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<dirent.h>
+	"gestbib.h"
+	<sys/types.h>
+
